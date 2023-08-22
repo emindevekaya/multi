@@ -1,0 +1,4 @@
+.player-inner-container {
+  display: flex;
+  flex: 1;
+}

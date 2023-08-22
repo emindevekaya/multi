@@ -1,0 +1,10 @@
+.life-text {
+  position: absolute;
+  align-self: center;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 30vw;
+  font-weight: bold;
+  user-select: none;
+  pointer-events: none;
+}
