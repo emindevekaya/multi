@@ -1,5 +1,5 @@
 {
-  "name": "lifecounter",
+  "name": "multi",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,17 +11,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/emindevekaya/lifecounter.git"
+    "url": "git+https://github.com/emindevekaya/multi.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/emindevekaya/lifecounter/issues"
+    "url": "https://github.com/emindevekaya/multi/issues"
   },
-  "homepage": "https://emindevekaya.github.io/lifecounter",
+  "homepage": "https://emindevekaya.github.io/multi",
   "dependencies": {
-    "howler": "^2.2.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

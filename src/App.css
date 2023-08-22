@@ -1,12 +1,27 @@
-html,
-body {
-  height: 100%;
-  margin: 0; 
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.main-container {
-	height: 100vh;
-  width: 100vw;
-	display: flex;
-	flex-direction: row;
+.multi-container {
+  max-width: 12rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.multi-paragraph {
+  text-align: center;
+}
+
+.count-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.5); }
+  100% { transform: scale(1); }
 }

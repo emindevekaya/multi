@@ -1,43 +1,71 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import "./App.css";
-import { Howl } from "howler";
-import PlayerContainer from "./components/PlayerContainer";
-import ResetContainer from "./components/ResetContainer";
-import { useLocalStorage } from "./hooks/useLocalStorage";
 
 function App() {
-  const [player1Total, setPlayer1Total] = useLocalStorage("player1Total", 20);
-  const [player2Total, setPlayer2Total] = useLocalStorage("player2Total", 20);
+  const [correctCount, setCorrectCount] = useState(0);
+  const [wrongCount, setWrongCount] = useState(0);
+  const [multiplicand, setMultiplicand] = useState(getRandomValue());
+  const [multiplier, setMultiplier] = useState(getRandomValue());
+  const [input, setInput] = useState("");
+  const correctRef = useRef();
+  const wrongRef = useRef();
 
-  const howl = new Howl({
-    src: "https://soundbible.com/mp3/Click2-Sebastian-759472264.mp3",
-    html5: true,
-  });
-
-  const addPlayer1Total = (amount) => {
-    setPlayer1Total((t) => t + amount);
-    howl.play();
+  const onKeyUp = (event) => {
+    if (event.key == "Enter") {
+      if (isCorrect()) {
+        setCorrectCount(correctCount + 1);
+        playAnimation(correctRef);
+        reset();
+      } else {
+        setWrongCount(wrongCount + 1);
+        playAnimation(wrongRef);
+      }
+    }
   };
 
-  const addPlayer2Total = (amount) => {
-    setPlayer2Total((t) => t + amount);
-    howl.play();
+  const playAnimation = (ref) => {
+    ref.current.style.animation = "";
+    setTimeout(() => {
+      ref.current.style.animation = "pulse 1s";
+    }, 0);
   };
 
   const reset = () => {
-    setPlayer1Total(20);
-    setPlayer2Total(20);
-    howl.play();
+    setMultiplicand(getRandomValue());
+    setMultiplier(getRandomValue());
+    setInput("");
   };
 
+  const onChange = (event) => {
+    setInput(event.target.value);
+  };
+
+  const isCorrect = () => {
+    return multiplicand * multiplier == input;
+  };
+
+  function getRandomValue() {
+    return parseInt(Math.random() * 10 + 1);
+  }
+
   return (
-    <>
-      <div className="main-container">
-        <PlayerContainer total={player1Total} onClick={addPlayer1Total} />
-        <ResetContainer onClick={reset} />
-        <PlayerContainer total={player2Total} onClick={addPlayer2Total} />
+    <div className="container">
+      <div className="multi-container">
+        <h1 className="multi-paragraph">
+          {multiplicand} x {multiplier}
+        </h1>
+        <input
+          type="number"
+          onChange={onChange}
+          onKeyUp={onKeyUp}
+          value={input}
+        />
+        <div className="count-container">
+          <span ref={correctRef}>✔️{correctCount}</span>
+          <span ref={wrongRef}>❌{wrongCount}</span>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
 
