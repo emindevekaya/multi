@@ -10,7 +10,7 @@ function App() {
   const correctRef = useRef();
   const wrongRef = useRef();
 
-  const onKeyUp = (event) => {
+  function onKeyUp(event) {
     if (event.key == "Enter") {
       if (isCorrect()) {
         setCorrectCount(correctCount + 1);
@@ -21,28 +21,28 @@ function App() {
         playAnimation(wrongRef);
       }
     }
-  };
+  }
 
-  const playAnimation = (ref) => {
+  function playAnimation(ref) {
     ref.current.style.animation = "";
     setTimeout(() => {
       ref.current.style.animation = "pulse 1s";
     }, 0);
-  };
+  }
 
-  const reset = () => {
+  function reset() {
     setMultiplicand(getRandomValue());
     setMultiplier(getRandomValue());
     setInput("");
-  };
+  }
 
-  const onChange = (event) => {
+  function onChange(event) {
     setInput(event.target.value);
-  };
+  }
 
-  const isCorrect = () => {
+  function isCorrect() {
     return multiplicand * multiplier == input;
-  };
+  }
 
   function getRandomValue() {
     return parseInt(Math.random() * 10 + 1);
